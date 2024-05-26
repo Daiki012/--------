@@ -12,7 +12,7 @@ from pylab import *
 
 start=time.time()
 
-#a, b, e, ee, E, k1, k2, t, x, y = sy.symbols("a, b, e, ee, E, k1, k2, t, x, y", real=True)
+#Analytical
 '''
 N = 100
 x1 = np.linspace(-np.pi, np.pi, N)
@@ -92,7 +92,7 @@ ax.set_title("DoS of Kagomé Lattice")
 plt.show()
 
 
-
+#Numerical
 t = 1
 a = 1
 def q1(x, y):
@@ -103,13 +103,6 @@ def E1(x, y, a):
     return -t+t*sqrt(2*(cos(q1(x, y))+cos(q2(x, y))+cos(q1(x, y)+q2(x, y)))+3)
 def E2(x, y, a):
     return -t-t*sqrt(2*(cos(q1(x, y))+cos(q2(x, y))+cos(q1(x, y)+q2(x, y)))+3)
-def E3(x, y, a):
-    return 2*t
-
-def E1(x, y, a):
-    return -t+t*sqrt(2*(cos(a*(x+sqrt(3)*y))+cos(a*(x-sqrt(3)*y))+cos(2*a*x))+3)
-def E2(x, y, a):
-    return -t-t*sqrt(2*(cos(a*(x+sqrt(3)*y))+cos(a*(x-sqrt(3)*y))+cos(2*a*x))+3)
 def E3(x, y, a):
     return 2*t
 
