@@ -92,7 +92,7 @@ ax.set_title("DoS of Kagomé Lattice")
 plt.show()
 
 
-#Numerical
+
 t = 1
 a = 1
 def q1(x, y):
@@ -137,6 +137,7 @@ plt.ylabel('E')
 plt.show()
 
 '''
+#Numerical
 a = 1
 def q1(x, y):
     return a*(x+sqrt(3)*y)
@@ -283,6 +284,6 @@ plot(E, midpoint(E, 3)/(2*pi**2), label = 'E3')
 plt.xlabel('E')
 plt.ylabel('D(E)')
 plt.legend()
-ax.set_title("pDoS of Kagomé Lattice(Numerical)")
+ax.set_title("DoS of Kagomé Lattice(Numerical)")
 print(float(time.time())-start)
 plt.show()
