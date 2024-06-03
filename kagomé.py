@@ -41,12 +41,12 @@ ax.set_ylabel('θ2')
 ax.set_zlabel('E')
 plt.show()
 
-
+'''
 
 eps = 0.01
 t = 1
 def d(x):
-    return eps**2/(pi*(x**2+eps**2))
+    return eps/(pi*(x**2+eps**2))
 
 #def E4(x, y):
     #return -2*t*(np.cos(x)+np.cos(y))
@@ -76,22 +76,22 @@ for a in (1,):
     idx = 0
     diffdos2 = lambda y, x: diffdos(x, y, E)
     for E in E_ary:
-        val1[idx], err = integrate.dblquad(diffdos2, -2*pi/(3*a), -pi/(3*a), lambda x: -sqrt(3)*(x+(2*pi/(3*a))), lambda x: sqrt(3)*(x+(2*pi/(3*a))), epsabs = 0.0005)
-        val2[idx], err = integrate.dblquad(diffdos2, -pi/(3*a), pi/(3*a), -pi/(sqrt(3)*a), pi/(sqrt(3)*a), epsabs = 0.0005)
-        val3[idx], err = integrate.dblquad(diffdos2, pi/(3*a), 2*pi/(3*a), lambda x: sqrt(3)*(x-(2*pi/(3*a))), lambda x: -sqrt(3)*(x-(2*pi/(3*a))), epsabs = 0.0005)
+        val1[idx], err = integrate.dblquad(diffdos2, -2*pi/(3*a), -pi/(3*a), lambda x: -sqrt(3)*(x+(2*pi/(3*a))), lambda x: sqrt(3)*(x+(2*pi/(3*a))), epsabs = 0.05)
+        val2[idx], err = integrate.dblquad(diffdos2, -pi/(3*a), pi/(3*a), -pi/(sqrt(3)*a), pi/(sqrt(3)*a), epsabs = 0.05)
+        val3[idx], err = integrate.dblquad(diffdos2, pi/(3*a), 2*pi/(3*a), lambda x: sqrt(3)*(x-(2*pi/(3*a))), lambda x: -sqrt(3)*(x-(2*pi/(3*a))), epsabs = 0.05)
         idx = idx + 1
     ax.plot(E_ary, val1+val2+val3, label='a=%a' %a)
 ax.set_xlim([-4.5, 2.5])
-ax.set_ylim([0, 0.004])
-plt.vlines(2, 0, 0.004, '#377eb8')
+ax.set_ylim([0, 0.5])
+plt.vlines(2, 0, 1.5, '#377eb8')
 plt.xlabel('E')
 plt.ylabel('D(E)')
 #plt.legend()
 ax.set_title("DoS of Kagomé Lattice")
-
+print(float(time.time())-start)
 plt.show()
 
-
+'''
 
 t = 1
 a = 1
@@ -136,7 +136,7 @@ plt.xlabel('k')
 plt.ylabel('E')
 plt.show()
 
-'''
+
 #Numerical
 a = 1
 def q1(x, y):
@@ -155,7 +155,8 @@ eigvals = np.array([[np.sort(sp.linalg.eigh(H(q1(x, y), q2(x, y)), eigvals_only 
 def eigvals(x, y):
     return np.sort(sp.linalg.eigh(H(q1(x, y), q2(x, y)), eigvals_only = True))
 
-'''
+
+
 n = 128
 fig, ax = plt.subplots()
 ax.set_xlim([-0.1, 4*pi/3+0.1])
@@ -164,7 +165,6 @@ ax.set_ylim([-4.1, 2.1])
 val0 = val1 = val2 = zeros(n)
 
 xx1 = linspace (0, 2*pi/(3*a), n)
-
 for i in range(n):
     x = i*2*pi/(3*a*n)
     val0[i] = eigvals(x, 0)[0]
@@ -176,7 +176,7 @@ plot(xx1, val1, "#377eb8")
 for i in range(n):
     x = i*2*pi/(3*a*n)
     val2[i] = eigvals(x, 0)[2]
-plot(xx1, val2, "#4daf4a")
+plot(xx1, val2, "#4daf4a", linewidth = 3)
 print(val0, val1 ,val2)
 
 
@@ -234,10 +234,10 @@ plt.ylabel('E')
 
 plt.show()
 
-'''
+
 eps = 0.01
 def d(x):
-    return eps**2/(pi*(x**2+eps**2))
+    return eps/(pi*(x**2+eps**2))
 n = 256
 
 
@@ -274,16 +274,17 @@ def midpoint(E, j):
 E = linspace(-4.5, 2.5, 128)
 fig, ax = plt.subplots()
 ax.set_xlim([-4.5, 2.5])
-ax.set_ylim([0, 0.008])
+ax.set_ylim([0, 1.5])
 plot(E, midpoint(E, 0)/(2*pi**2))
-'''
-plot(E, midpoint(E, 1)/(2*pi**2), label = 'E1')
-plot(E, midpoint(E, 2)/(2*pi**2), label = 'E2')
-plot(E, midpoint(E, 3)/(2*pi**2), label = 'E3')
-'''
+
+#plot(E, midpoint(E, 1)/(2*pi**2), label = 'E1')
+#plot(E, midpoint(E, 2)/(2*pi**2), label = 'E2')
+#plot(E, midpoint(E, 3)/(2*pi**2), label = 'E3')
+
 plt.xlabel('E')
 plt.ylabel('D(E)')
 plt.legend()
 ax.set_title("DoS of Kagomé Lattice(Numerical)")
-print(float(time.time())-start)
+
 plt.show()
+'''
