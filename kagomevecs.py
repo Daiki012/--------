@@ -21,16 +21,16 @@ def q2(x, y):
     return a*(x-sqrt(3)*y)
 t = 1
 def H(q1, q2):
-    return -t*np.array([  [0, 1+exp(1j*q1) ,1+exp(-1j*q2)],
-                        [1+exp(-1j*q1), 0, 1+exp(-1j*(q1+q2))],
-                        [1+exp(1j*q2), 1+exp(1j*(q1+q2)), 0]])
+    return -t*np.array([    [0, 1+exp(1j*q1) ,1+exp(-1j*q2)],
+                            [1+exp(-1j*q1), 0, 1+exp(-1j*(q1+q2))],
+                            [1+exp(1j*q2), 1+exp(1j*(q1+q2)), 0]])
 def eigvals(x, y):
     return sp.linalg.eigh(H(q1(x, y), q2(x, y)))[0]
 N = 2
 x_ary = y_ary = linspace(0, 0.5, N)
 
-g1 = 2*pi*np.array([1, 0])/3
-g2 = 2*pi*np.array([-1/2, sqrt(3)/2])/3
+g1 = 2*pi*np.array([sqrt(3)/2, 1/2])/(a*sqrt(3))
+g2 = 2*pi*np.array([sqrt(3)/2, -1/2])/(a*sqrt(3))
 g3 = g1+g2
 
 # vec = np.zeros((3, N**2), complex)
@@ -57,7 +57,7 @@ def diffdos(x, y, E):
     return d(E-eigvals(x, y)[0])+d(E-eigvals(x, y)[1])+d(E-eigvals(x, y)[2])
 def diffdosvec(x, y, E):
     return array([d(E-eigvals(x, y)[0]), d(E-eigvals(x, y)[1]), d(E-eigvals(x, y)[2])])
-N = 128
+N = 256
 vec = np.zeros((3, N**2), complex)
 def midpoint(E, k):
     g1h, g3h, ans = g1/N, g3/N, 0
